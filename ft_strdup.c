@@ -1,42 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmsibi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/22 15:04:42 by dmsibi            #+#    #+#             */
-/*   Updated: 2018/05/23 17:16:41 by dmsibi           ###   ########.fr       */
+/*   Created: 2018/05/23 15:15:24 by dmsibi            #+#    #+#             */
+/*   Updated: 2018/05/23 16:11:06 by dmsibi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include "ft_isdigit.c"
-#include "ft_isspace.c"
+#include <stdio.h>
+#include <stdlib.h>
+#include "ft_strlen.c"
 
-int		ft_atoi(char *str)
+char	*ft_strdup(char *str)
 {
+	char	*p;
 	int		i;
-	int		result;
-	int		sign;
 
 	i = 0;
-	sign = 1;
-	result = 0;
-	while (ft_isspace(str[i]))
-		i++;
-	if (str[i] == '-' && str[i] == '+')
+	p = (char *)malloc(sizeof(char) * ft_strlen(str) + 1);
+	if (p == NULL)
+		return (NULL);
+	while (str[i] != '\0')
 	{
-		if (str[i] == '-')
-			sign = -1;
-		else
-			sign = 1;
+		p[i] = str[i];
 		i++;
 	}
-	while (ft_isdigit(str[i]))
-	{
-		result = (result * 10) + (str[i] - '0');
-		i++;
-	}
-	return ((int)sign * result);
+	p[i] = '\0';
+	return (p);
+}
+
+int		main(void)
+{
+	printf("%s\n", ft_strdup("This is My duplicated string"));
+	return (0);
 }

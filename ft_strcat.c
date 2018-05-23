@@ -1,42 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dmsibi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/22 15:04:42 by dmsibi            #+#    #+#             */
-/*   Updated: 2018/05/23 17:16:41 by dmsibi           ###   ########.fr       */
+/*   Created: 2018/05/23 15:31:45 by dmsibi            #+#    #+#             */
+/*   Updated: 2018/05/23 17:20:27 by dmsibi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include "ft_isdigit.c"
-#include "ft_isspace.c"
+#include <stdio.h>
 
-int		ft_atoi(char *str)
+char	*ft_strcat(char *str1, char *str2)
 {
 	int		i;
-	int		result;
-	int		sign;
+	register char	*p = str1;
 
 	i = 0;
-	sign = 1;
-	result = 0;
-	while (ft_isspace(str[i]))
-		i++;
-	if (str[i] == '-' && str[i] == '+')
-	{
-		if (str[i] == '-')
-			sign = -1;
-		else
-			sign = 1;
-		i++;
-	}
-	while (ft_isdigit(str[i]))
-	{
-		result = (result * 10) + (str[i] - '0');
-		i++;
-	}
-	return ((int)sign * result);
+	while (*p)
+		++p;
+	while (*p++ == *str2++)
+		;
+	return (str1);
+}
+
+int		main(void)
+{
+	printf("%s\n", ft_strcat("mini", "us"));
+	return (0);
 }
